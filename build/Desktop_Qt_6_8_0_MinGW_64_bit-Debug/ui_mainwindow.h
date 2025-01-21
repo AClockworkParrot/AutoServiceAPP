@@ -32,10 +32,10 @@ public:
     QVBoxLayout *verticalLayout;
     QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout_2;
-    QLineEdit *lineEdit;
+    QLineEdit *lineFilePath;
     QPushButton *loadButton;
     QHBoxLayout *horizontalLayout;
-    QLineEdit *lineEdit_2;
+    QLineEdit *lineSaveFilePath;
     QPushButton *saveButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -44,7 +44,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(340, 319);
+        MainWindow->resize(468, 329);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -70,10 +70,10 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        lineEdit = new QLineEdit(centralwidget);
-        lineEdit->setObjectName("lineEdit");
+        lineFilePath = new QLineEdit(centralwidget);
+        lineFilePath->setObjectName("lineFilePath");
 
-        horizontalLayout_2->addWidget(lineEdit);
+        horizontalLayout_2->addWidget(lineFilePath);
 
         loadButton = new QPushButton(centralwidget);
         loadButton->setObjectName("loadButton");
@@ -85,10 +85,10 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        lineEdit_2 = new QLineEdit(centralwidget);
-        lineEdit_2->setObjectName("lineEdit_2");
+        lineSaveFilePath = new QLineEdit(centralwidget);
+        lineSaveFilePath->setObjectName("lineSaveFilePath");
 
-        horizontalLayout->addWidget(lineEdit_2);
+        horizontalLayout->addWidget(lineSaveFilePath);
 
         saveButton = new QPushButton(centralwidget);
         saveButton->setObjectName("saveButton");
@@ -104,7 +104,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 340, 21));
+        menubar->setGeometry(QRect(0, 0, 468, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -118,7 +118,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        lineFilePath->setText(QCoreApplication::translate("MainWindow", "C:/Qt projects/AutoService/AutoParts.csv", nullptr));
         loadButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
+        lineSaveFilePath->setText(QCoreApplication::translate("MainWindow", "C:/Qt projects/AutoService/AutoParts2.csv", nullptr));
         saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
     } // retranslateUi
 

@@ -25,6 +25,7 @@ public:
 
 private slots:
     void onLoadCSV(); // Слот для загрузки CSV файла
+    void onSaveCSV();
 
     void on_centralwidget_customContextMenuRequested(const QPoint &pos);
 

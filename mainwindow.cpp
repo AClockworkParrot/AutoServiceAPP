@@ -12,27 +12,62 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Подключение кнопки загрузки
     connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::onLoadCSV);
+    connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::onSaveCSV);
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
+// Слот onLoadCSV
 void MainWindow::onLoadCSV() {
     // Укажите путь к файлу CSV здесь
-    QString filePath = "C:/Qt projects/AutoService/AutoParts.csv"; // Замените на ваш путь
+    QString openFilePath = this->ui->lineFilePath->text();
 
     // Проверяем, существует ли файл
-    if (!QFile::exists(filePath)) {
+    if (!QFile::exists(openFilePath)) {
         QMessageBox::warning(this, "Ошибка", "Файл не найден!");
         return;
     }
 
-    loadCSV(filePath);
+    loadCSV(openFilePath);
 }
 
-void MainWindow::loadCSV(const QString &filePath) {
-    QFile file(filePath);
+void MainWindow::onSaveCSV() {
+    // Получаем путь для сохранения файла из виджета
+    QString saveFilePath = this->ui->lineSaveFilePath->text();
+
+    // Проверяем, указан ли путь к файлу
+    if (saveFilePath.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Пожалуйста, укажите путь для сохранения файла!");
+        return;
+    }
+
+    QFile file(saveFilePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл для записи!");
+        return;
+    }
+
+    QTextStream stream(&file);
+    stream.setEncoding(QStringConverter::Utf8);
+
+    // Сохранение данных из QTableWidget в файл
+    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+        QStringList rowValues;
+        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+            QTableWidgetItem *item = ui->tableWidget->item(row, col);
+            rowValues.append(item ? item->text() : ""); // Если ячейка пустая, добавляем пустую строку
+        }
+        stream << rowValues.join(",") << "\n"; // Разделитель - запятая
+    }
+
+    file.close();
+    QMessageBox::information(this, "Успех", "Файл успешно сохранён по указанному пути!");
+}
+
+void MainWindow::loadCSV(const QString &openFilePath) {
+    QFile file(openFilePath);
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл!");
         return;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>340</width>
-    <height>319</height>
+    <width>468</width>
+    <height>329</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -60,7 +60,11 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineFilePath">
+          <property name="text">
+           <string>C:/Qt projects/AutoService/AutoParts.csv</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="loadButton">
@@ -74,7 +78,11 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineSaveFilePath">
+          <property name="text">
+           <string>C:/Qt projects/AutoService/AutoParts2.csv</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="saveButton">
@@ -94,7 +102,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>340</width>
+     <width>468</width>
      <height>21</height>
     </rect>
    </property>
