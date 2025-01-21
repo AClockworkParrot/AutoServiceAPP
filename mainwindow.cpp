@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    // Устанавливаем название окна программы
+    this->setWindowTitle("AutoServiceAPP");
+
     // Настройка таблицы из интерфейса
     ui->tableWidget->setColumnCount(0);
     ui->tableWidget->setRowCount(0);
