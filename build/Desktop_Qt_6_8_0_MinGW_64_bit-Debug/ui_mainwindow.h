@@ -45,7 +45,10 @@ public:
     QPushButton *loadButton;
     QLineEdit *lineFilePath;
     QVBoxLayout *verticalLayout_2;
+    QLabel *label_2;
+    QLineEdit *lineSearch;
     QVBoxLayout *verticalLayout;
+    QPushButton *searchButton;
     QLabel *label;
     QCheckBox *checkBox;
     QPushButton *sortAscButton;
@@ -59,7 +62,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(557, 545);
+        MainWindow->resize(495, 383);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -75,9 +78,11 @@ public:
         centralwidget->setMinimumSize(QSize(0, 0));
         centralwidget->setMaximumSize(QSize(1920, 1080));
         horizontalLayout = new QHBoxLayout(centralwidget);
+        horizontalLayout->setSpacing(2);
         horizontalLayout->setObjectName("horizontalLayout");
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName("gridLayout_2");
+        gridLayout_2->setSizeConstraint(QLayout::SizeConstraint::SetMaximumSize);
         tableWidget = new QTableWidget(centralwidget);
         tableWidget->setObjectName("tableWidget");
         sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
@@ -120,14 +125,30 @@ public:
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
         QFont font;
         font.setPointSize(22);
+        label_2->setFont(font);
+
+        verticalLayout_2->addWidget(label_2);
+
+        lineSearch = new QLineEdit(centralwidget);
+        lineSearch->setObjectName("lineSearch");
+
+        verticalLayout_2->addWidget(lineSearch);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        searchButton = new QPushButton(centralwidget);
+        searchButton->setObjectName("searchButton");
+
+        verticalLayout->addWidget(searchButton);
+
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
         label->setFont(font);
-        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        label->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
 
         verticalLayout->addWidget(label);
 
@@ -156,10 +177,12 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_2);
 
+        horizontalLayout->setStretch(0, 7);
+        horizontalLayout->setStretch(1, 1);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 557, 21));
+        menubar->setGeometry(QRect(0, 0, 495, 21));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName("menuHelp");
         MainWindow->setMenuBar(menubar);
@@ -181,7 +204,9 @@ public:
         saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
         lineSaveFilePath->setText(QCoreApplication::translate("MainWindow", "C:/Qt projects/AutoService/AutoParts2.csv", nullptr));
         loadButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
-        lineFilePath->setText(QCoreApplication::translate("MainWindow", "C:\\Users\\lemon\\OneDrive\\\320\240\320\260\320\261\320\276\321\207\320\270\320\271 \321\201\321\202\320\276\320\273\\\320\230\320\242\320\234\320\236\\\320\230\320\275\320\266\320\270\320\275\320\270\321\200\320\270\320\275\320\263 \321\203\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\321\217 \320\264\320\260\320\275\320\275\321\213\320\274\320\270\\Datasets\\\320\232\320\270\320\275\320\276\321\202\320\265\320\260\321\202\321\200\321\213\\kinoteatry.csv", nullptr));
+        lineFilePath->setText(QCoreApplication::translate("MainWindow", "C:\\Qt projects\\AutoService\\AutoParts2.csv", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
+        searchButton->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
         checkBox->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\320\263\320\276\320\273\320\276\320\262\320\276\320\272", nullptr));
         sortAscButton->setText(QCoreApplication::translate("MainWindow", "Increase", nullptr));

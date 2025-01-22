@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>453</width>
-    <height>338</height>
+    <width>495</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,9 +44,15 @@
      <height>1080</height>
     </size>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,1">
+    <property name="spacing">
+     <number>2</number>
+    </property>
     <item>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QTableWidget" name="tableWidget">
         <property name="sizePolicy">
@@ -98,7 +104,29 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>22</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineSearch"/>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="searchButton">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLabel" name="label">
           <property name="font">
@@ -110,7 +138,7 @@
            <string>Filter</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignmentFlag::AlignCenter</set>
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -159,7 +187,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>453</width>
+     <width>495</width>
      <height>21</height>
     </rect>
    </property>

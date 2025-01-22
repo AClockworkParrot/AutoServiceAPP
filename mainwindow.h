@@ -30,6 +30,7 @@ private slots:
     void on_centralwidget_customContextMenuRequested(const QPoint &pos);
     void onSortAscending();
     void onSortDescending();
+    void onSearch();
 
 private:
     Ui::MainWindow *ui;

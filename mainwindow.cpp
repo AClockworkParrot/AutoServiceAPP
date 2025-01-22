@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     // Подключение кнопок сортировки
     connect(ui->sortAscButton, &QPushButton::clicked, this, &MainWindow::onSortAscending);
     connect(ui->sortDescButton, &QPushButton::clicked, this, &MainWindow::onSortDescending);
+
+    // Подключение кнопки поиска
+    connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearch);
 }
 
 MainWindow::~MainWindow() {
@@ -123,6 +126,35 @@ void MainWindow::onSortDescending() {
     }
     ui->tableWidget->sortItems(column, Qt::DescendingOrder);
 }
+
+// Поиск строки в таблице
+void MainWindow::onSearch() {
+    QString query = ui->lineSearch->text().trimmed(); // Получаем строку поиска
+
+    if (query.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Введите текст для поиска!");
+        return;
+    }
+
+    bool found = false;
+
+    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+            QTableWidgetItem *item = ui->tableWidget->item(row, col);
+            if (item && item->text().contains(query, Qt::CaseInsensitive)) {
+                ui->tableWidget->setCurrentCell(row, col);
+                found = true;
+                break;
+            }
+        }
+        if (found) break;
+    }
+
+    if (!found) {
+        QMessageBox::information(this, "Результаты поиска", "Строка не найдена.");
+    }
+}
+
 
 void MainWindow::on_centralwidget_customContextMenuRequested(const QPoint &pos)
 {
