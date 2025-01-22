@@ -22,6 +22,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Подключение кнопки поиска
     connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearch);
+
+    // Подключение чекбокса заголовка
+    connect(ui->headingCheckBox, &QCheckBox::checkStateChanged, this, &MainWindow::onHeadingStateChanged);
+
+    // Подключение кнопок добавления строк и столбцов
+    connect(ui->addRowButton, &QPushButton::clicked, this, &MainWindow::onAddRow);
+    connect(ui->addColumnButton, &QPushButton::clicked, this, &MainWindow::onAddColumn);
 }
 
 MainWindow::~MainWindow() {
@@ -114,9 +121,12 @@ void MainWindow::onSortAscending() {
         QMessageBox::warning(this, "Ошибка", "Выберите столбец для сортировки!");
         return;
     }
+    int headerRow = ui->headingCheckBox->isChecked() ? 0 : 1; // Если включен заголовок, пропускаем первую строку
     ui->tableWidget->sortItems(column, Qt::AscendingOrder);
+    if (headerRow == 1) {
+        restoreHeaderRow(); // Восстанавливаем заголовок после сортировки
+    }
 }
-
 // Сортировка по убыванию
 void MainWindow::onSortDescending() {
     int column = ui->tableWidget->currentColumn(); // Получаем текущий выбранный столбец
@@ -124,7 +134,11 @@ void MainWindow::onSortDescending() {
         QMessageBox::warning(this, "Ошибка", "Выберите столбец для сортировки!");
         return;
     }
+    int headerRow = ui->headingCheckBox->isChecked() ? 1 : 0; // Если включен заголовок, пропускаем первую строку
     ui->tableWidget->sortItems(column, Qt::DescendingOrder);
+    if (headerRow == 1) {
+        restoreHeaderRow(); // Восстанавливаем заголовок после сортировки
+    }
 }
 
 // Поиск строки в таблице
@@ -153,6 +167,62 @@ void MainWindow::onSearch() {
     if (!found) {
         QMessageBox::information(this, "Результаты поиска", "Строка не найдена.");
     }
+}
+
+// Обработка изменения состояния чекбокса заголовка
+void MainWindow::onHeadingStateChanged(int state) {
+    if (state == Qt::Checked) {
+        QFont boldFont;
+        boldFont.setBold(true);
+
+        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+            QTableWidgetItem *item = ui->tableWidget->item(0, col);
+            if (item) {
+                item->setFont(boldFont);
+            }
+        }
+    } else {
+        QFont normalFont;
+        normalFont.setBold(false);
+
+        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+            QTableWidgetItem *item = ui->tableWidget->item(0, col);
+            if (item) {
+                item->setFont(normalFont);
+            }
+        }
+    }
+}
+
+// Восстановление заголовка после сортировки
+void MainWindow::restoreHeaderRow() {
+    QList<QTableWidgetItem *> headerItems;
+
+    for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+        QTableWidgetItem *item = ui->tableWidget->takeItem(0, col);
+        if (item) {
+            headerItems.append(item);
+        }
+    }
+
+    ui->tableWidget->removeRow(0);
+    ui->tableWidget->insertRow(0);
+
+    for (int col = 0; col < headerItems.size(); ++col) {
+        ui->tableWidget->setItem(0, col, headerItems[col]);
+    }
+}
+
+// Добавление новой строки
+void MainWindow::onAddRow() {
+    int currentRowCount = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow(currentRowCount);
+}
+
+// Добавление нового столбца
+void MainWindow::onAddColumn() {
+    int currentColumnCount = ui->tableWidget->columnCount();
+    ui->tableWidget->insertColumn(currentColumnCount);
 }
 
 

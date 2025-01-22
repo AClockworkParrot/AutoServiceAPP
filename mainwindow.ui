@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>495</width>
-    <height>383</height>
+    <height>395</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,9 +45,6 @@
     </size>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,1">
-    <property name="spacing">
-     <number>2</number>
-    </property>
     <item>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="sizeConstraint">
@@ -143,9 +140,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="headingCheckBox">
           <property name="text">
-           <string>Заголовок</string>
+           <string>Heading</string>
           </property>
          </widget>
         </item>
@@ -160,6 +157,35 @@
          <widget class="QPushButton" name="sortDescButton">
           <property name="text">
            <string>Decrease</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Add</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addColumnButton">
+          <property name="text">
+           <string>Add column</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addRowButton">
+          <property name="text">
+           <string>Add row</string>
           </property>
          </widget>
         </item>

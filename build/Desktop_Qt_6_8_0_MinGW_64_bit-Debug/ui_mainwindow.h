@@ -50,9 +50,12 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *searchButton;
     QLabel *label;
-    QCheckBox *checkBox;
+    QCheckBox *headingCheckBox;
     QPushButton *sortAscButton;
     QPushButton *sortDescButton;
+    QLabel *label_3;
+    QPushButton *addColumnButton;
+    QPushButton *addRowButton;
     QSpacerItem *verticalSpacer;
     QMenuBar *menubar;
     QMenu *menuHelp;
@@ -62,7 +65,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(495, 383);
+        MainWindow->resize(495, 395);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -78,7 +81,6 @@ public:
         centralwidget->setMinimumSize(QSize(0, 0));
         centralwidget->setMaximumSize(QSize(1920, 1080));
         horizontalLayout = new QHBoxLayout(centralwidget);
-        horizontalLayout->setSpacing(2);
         horizontalLayout->setObjectName("horizontalLayout");
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName("gridLayout_2");
@@ -152,10 +154,10 @@ public:
 
         verticalLayout->addWidget(label);
 
-        checkBox = new QCheckBox(centralwidget);
-        checkBox->setObjectName("checkBox");
+        headingCheckBox = new QCheckBox(centralwidget);
+        headingCheckBox->setObjectName("headingCheckBox");
 
-        verticalLayout->addWidget(checkBox);
+        verticalLayout->addWidget(headingCheckBox);
 
         sortAscButton = new QPushButton(centralwidget);
         sortAscButton->setObjectName("sortAscButton");
@@ -166,6 +168,23 @@ public:
         sortDescButton->setObjectName("sortDescButton");
 
         verticalLayout->addWidget(sortDescButton);
+
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName("label_3");
+        label_3->setFont(font);
+        label_3->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
+
+        verticalLayout->addWidget(label_3);
+
+        addColumnButton = new QPushButton(centralwidget);
+        addColumnButton->setObjectName("addColumnButton");
+
+        verticalLayout->addWidget(addColumnButton);
+
+        addRowButton = new QPushButton(centralwidget);
+        addRowButton->setObjectName("addRowButton");
+
+        verticalLayout->addWidget(addRowButton);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
@@ -208,9 +227,12 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         searchButton->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
-        checkBox->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\320\263\320\276\320\273\320\276\320\262\320\276\320\272", nullptr));
+        headingCheckBox->setText(QCoreApplication::translate("MainWindow", "Heading", nullptr));
         sortAscButton->setText(QCoreApplication::translate("MainWindow", "Increase", nullptr));
         sortDescButton->setText(QCoreApplication::translate("MainWindow", "Decrease", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Add", nullptr));
+        addColumnButton->setText(QCoreApplication::translate("MainWindow", "Add column", nullptr));
+        addRowButton->setText(QCoreApplication::translate("MainWindow", "Add row", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi
 

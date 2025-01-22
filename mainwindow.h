@@ -31,6 +31,10 @@ private slots:
     void onSortAscending();
     void onSortDescending();
     void onSearch();
+    void onHeadingStateChanged(int state);
+    void restoreHeaderRow();
+    void onAddRow();
+    void onAddColumn();
 
 private:
     Ui::MainWindow *ui;
