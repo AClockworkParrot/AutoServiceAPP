@@ -120,7 +120,7 @@
         <item>
          <widget class="QPushButton" name="searchButton">
           <property name="text">
-           <string>Search</string>
+           <string>Search next</string>
           </property>
          </widget>
         </item>

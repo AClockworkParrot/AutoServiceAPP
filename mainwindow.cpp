@@ -172,25 +172,34 @@ void MainWindow::onSearch() {
 // Обработка изменения состояния чекбокса заголовка
 void MainWindow::onHeadingStateChanged(int state) {
     if (state == Qt::Checked) {
-        QFont boldFont;
-        boldFont.setBold(true);
+        QStringList columnLabels;
 
+        // Извлекаем значения из первой строки
         for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
-            QTableWidgetItem *item = ui->tableWidget->item(0, col);
-            if (item) {
-                item->setFont(boldFont);
-            }
+            QTableWidgetItem *item = ui->tableWidget->takeItem(0, col);
+            columnLabels.append(item ? item->text() : QString(""));
         }
+
+        ui->tableWidget->setHorizontalHeaderLabels(columnLabels);
+        ui->tableWidget->removeRow(0); // Удаляем первую строку
     } else {
-        QFont normalFont;
-        normalFont.setBold(false);
-
+        QStringList columnLabels;
         for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
-            QTableWidgetItem *item = ui->tableWidget->item(0, col);
-            if (item) {
-                item->setFont(normalFont);
-            }
+            QTableWidgetItem *headerItem = ui->tableWidget->horizontalHeaderItem(col);
+            columnLabels.append(headerItem ? headerItem->text() : QString(""));
         }
+
+        // Добавляем значения заголовка в первую строку
+        ui->tableWidget->insertRow(0);
+        for (int col = 0; col < columnLabels.size(); ++col) {
+            ui->tableWidget->setItem(0, col, new QTableWidgetItem(columnLabels[col]));
+        }
+
+        // Сбрасываем заголовки столбцов
+        for (int col = 0; col < columnLabels.size(); ++col) {
+            columnLabels[col] = "";
+        }
+        ui->tableWidget->setHorizontalHeaderLabels(columnLabels);
     }
 }
 
@@ -212,6 +221,7 @@ void MainWindow::restoreHeaderRow() {
         ui->tableWidget->setItem(0, col, headerItems[col]);
     }
 }
+
 
 // Добавление новой строки
 void MainWindow::onAddRow() {
