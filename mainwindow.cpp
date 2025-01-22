@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
     // Подключение кнопки загрузки
     connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::onLoadCSV);
     connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::onSaveCSV);
+    // Подключение кнопок сортировки
+    connect(ui->sortAscButton, &QPushButton::clicked, this, &MainWindow::onSortAscending);
+    connect(ui->sortDescButton, &QPushButton::clicked, this, &MainWindow::onSortDescending);
 }
 
 MainWindow::~MainWindow() {
@@ -99,6 +102,26 @@ void MainWindow::loadCSV(const QString &openFilePath) {
     }
 
     file.close();
+}
+
+// Сортировка по возрастанию
+void MainWindow::onSortAscending() {
+    int column = ui->tableWidget->currentColumn(); // Получаем текущий выбранный столбец
+    if (column == -1) {
+        QMessageBox::warning(this, "Ошибка", "Выберите столбец для сортировки!");
+        return;
+    }
+    ui->tableWidget->sortItems(column, Qt::AscendingOrder);
+}
+
+// Сортировка по убыванию
+void MainWindow::onSortDescending() {
+    int column = ui->tableWidget->currentColumn(); // Получаем текущий выбранный столбец
+    if (column == -1) {
+        QMessageBox::warning(this, "Ошибка", "Выберите столбец для сортировки!");
+        return;
+    }
+    ui->tableWidget->sortItems(column, Qt::DescendingOrder);
 }
 
 void MainWindow::on_centralwidget_customContextMenuRequested(const QPoint &pos)

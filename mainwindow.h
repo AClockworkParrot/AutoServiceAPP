@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QStringList>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,8 +27,9 @@ public:
 private slots:
     void onLoadCSV(); // Слот для загрузки CSV файла
     void onSaveCSV();
-
     void on_centralwidget_customContextMenuRequested(const QPoint &pos);
+    void onSortAscending();
+    void onSortDescending();
 
 private:
     Ui::MainWindow *ui;
