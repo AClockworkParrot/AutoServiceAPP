@@ -114,6 +114,7 @@ void MainWindow::onLoadCSV() {
     }
 }
 
+// Сохранение файла
 void MainWindow::onSaveCSV() {
     // Получаем путь для сохранения файла из виджета
     QString saveFilePath = this->ui->lineSaveFilePath->text();
@@ -145,38 +146,6 @@ void MainWindow::onSaveCSV() {
 
     file.close();
     QMessageBox::information(this, "Успех", "Файл успешно сохранён по указанному пути!");
-}
-
-void MainWindow::loadCSV(const QString &openFilePath) {
-    QFile file(openFilePath);
-    if (!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл!");
-        return;
-    }
-
-    ui->tableWidget->clear();
-    ui->tableWidget->setRowCount(0);
-    ui->tableWidget->setColumnCount(0);
-
-    QTextStream stream(&file);
-    int row = 0;
-
-    while (!stream.atEnd()) {
-        QString line = stream.readLine();
-        QStringList values = line.split(","); // Разделитель запятая
-
-        if (ui->tableWidget->columnCount() < values.size()) {
-            ui->tableWidget->setColumnCount(values.size());
-        }
-
-        ui->tableWidget->insertRow(row);
-        for (int col = 0; col < values.size(); ++col) {
-            ui->tableWidget->setItem(row, col, new QTableWidgetItem(values[col].trimmed()));
-        }
-        ++row;
-    }
-
-    file.close();
 }
 
 // Сортировка по возрастанию
