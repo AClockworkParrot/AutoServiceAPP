@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>518</width>
-    <height>513</height>
+    <width>725</width>
+    <height>618</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -132,7 +132,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Filter</string>
+           <string>Sort</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
@@ -157,6 +157,28 @@
          <widget class="QPushButton" name="sortDescButton">
           <property name="text">
            <string>Decrease</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="font">
+           <font>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Filter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineFilter"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="filterButton">
+          <property name="text">
+           <string>Filter</string>
           </property>
          </widget>
         </item>
@@ -239,7 +261,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>518</width>
+     <width>725</width>
      <height>21</height>
     </rect>
    </property>

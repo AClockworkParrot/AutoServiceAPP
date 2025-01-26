@@ -52,6 +52,9 @@ public:
     QCheckBox *headingCheckBox;
     QPushButton *sortAscButton;
     QPushButton *sortDescButton;
+    QLabel *label_5;
+    QLineEdit *lineFilter;
+    QPushButton *filterButton;
     QLabel *label_3;
     QPushButton *addColumnButton;
     QPushButton *addRowButton;
@@ -66,7 +69,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(518, 513);
+        MainWindow->resize(725, 618);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -170,6 +173,22 @@ public:
 
         verticalLayout->addWidget(sortDescButton);
 
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName("label_5");
+        label_5->setFont(font);
+
+        verticalLayout->addWidget(label_5);
+
+        lineFilter = new QLineEdit(centralwidget);
+        lineFilter->setObjectName("lineFilter");
+
+        verticalLayout->addWidget(lineFilter);
+
+        filterButton = new QPushButton(centralwidget);
+        filterButton->setObjectName("filterButton");
+
+        verticalLayout->addWidget(filterButton);
+
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName("label_3");
         label_3->setFont(font);
@@ -218,7 +237,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 518, 21));
+        menubar->setGeometry(QRect(0, 0, 725, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -239,10 +258,12 @@ public:
         lineFilePath->setText(QCoreApplication::translate("MainWindow", "C:\\Qt projects\\AutoService\\AutoParts.csv", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         searchButton->setText(QCoreApplication::translate("MainWindow", "Search next", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Sort", nullptr));
         headingCheckBox->setText(QCoreApplication::translate("MainWindow", "Heading", nullptr));
         sortAscButton->setText(QCoreApplication::translate("MainWindow", "Increase", nullptr));
         sortDescButton->setText(QCoreApplication::translate("MainWindow", "Decrease", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
+        filterButton->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Add", nullptr));
         addColumnButton->setText(QCoreApplication::translate("MainWindow", "Add column", nullptr));
         addRowButton->setText(QCoreApplication::translate("MainWindow", "Add row", nullptr));

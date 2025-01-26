@@ -241,7 +241,6 @@ void MainWindow::onSearch() {
     }
 }
 
-
 // Обработка изменения состояния чекбокса заголовка
 void MainWindow::onHeadingStateChanged(int state) {
     if (state == Qt::Checked) {
@@ -268,9 +267,9 @@ void MainWindow::onHeadingStateChanged(int state) {
             ui->tableWidget->setItem(0, col, new QTableWidgetItem(columnLabels[col]));
         }
 
-        // Сбрасываем заголовки столбцов
+        // Сбрасываем заголовки столбцов с нумерацией
         for (int col = 0; col < columnLabels.size(); ++col) {
-            columnLabels[col] = "";
+            columnLabels[col] = QString::number(col + 1); // Нумерация столбцов с 1
         }
         ui->tableWidget->setHorizontalHeaderLabels(columnLabels);
     }
@@ -294,7 +293,6 @@ void MainWindow::restoreHeaderRow() {
         ui->tableWidget->setItem(0, col, headerItems[col]);
     }
 }
-
 
 // Добавление новой строки
 void MainWindow::onAddRow() {
