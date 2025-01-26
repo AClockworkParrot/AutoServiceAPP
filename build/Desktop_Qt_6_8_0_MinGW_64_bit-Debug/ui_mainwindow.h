@@ -234,9 +234,9 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actiontools->setText(QCoreApplication::translate("MainWindow", "tools", nullptr));
         saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
-        lineSaveFilePath->setText(QCoreApplication::translate("MainWindow", "C:/Qt projects/AutoService/AutoParts2.csv", nullptr));
+        lineSaveFilePath->setText(QCoreApplication::translate("MainWindow", "C:/Qt projects/AutoService/AutoParts.csv", nullptr));
         loadButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
-        lineFilePath->setText(QCoreApplication::translate("MainWindow", "C:\\Qt projects\\AutoService\\AutoParts2.csv", nullptr));
+        lineFilePath->setText(QCoreApplication::translate("MainWindow", "C:\\Qt projects\\AutoService\\AutoParts.csv", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         searchButton->setText(QCoreApplication::translate("MainWindow", "Search next", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));

@@ -46,7 +46,7 @@ MainWindow::~MainWindow() {
 
 // Слот onLoadCSV
 void MainWindow::onLoadCSV() {
-    // Укажите путь к файлу CSV здесь
+    // путь к файлу CSV
     QString openFilePath = this->ui->lineFilePath->text();
 
     // Проверяем, существует ли файл
@@ -55,7 +55,59 @@ void MainWindow::onLoadCSV() {
         return;
     }
 
-    loadCSV(openFilePath);
+    QFile file(openFilePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл!");
+        return;
+    }
+
+    QTextStream in(&file);
+    QVector<QStringList> data;
+
+    // Чтение CSV файла
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList fields = line.split(",");
+        data.append(fields);
+    }
+    file.close();
+
+    // Преобразование строк в числа и поиск максимальной длины
+    QVector<int> maxLengths(data.first().size(), 0); // Массив для хранения максимальной длины каждого столбца
+
+    // Находим максимальные длины для каждого столбца
+    for (const QStringList &row : data) {
+        for (int col = 0; col < row.size(); ++col) {
+            bool ok;
+            int value = row[col].toInt(&ok); //  преобразование строки в число
+            if (ok) { // Если это число
+                int length = QString::number(value).length(); // Длина числа
+                maxLengths[col] = qMax(maxLengths[col], length); // Обновляем максимальную длину
+            }
+        }
+    }
+
+    // Добавляем нули в числовые элементы
+    for (int i = 0; i < data.size(); ++i) {
+        for (int col = 0; col < data[i].size(); ++col) {
+            bool ok;
+            int value = data[i][col].toInt(&ok); // Ппреобразование строки в число
+            if (ok) {
+                int length = QString::number(value).length();
+                // Если длина числа меньше максимальной, добавляем нули
+                if (length < maxLengths[col]) {
+                    data[i][col] = QString("%1").arg(value, maxLengths[col], 10, QChar('0')); // Форматируем с добавлением нулей
+                }
+            }
+        }
+    }
+
+    this->ui->tableWidget->setRowCount(data.size());
+    for (int row = 0; row < data.size(); ++row) {
+        for (int col = 0; col < data[row].size(); ++col) {
+            this->ui->tableWidget->setItem(row, col, new QTableWidgetItem(data[row][col]));
+        }
+    }
 }
 
 void MainWindow::onSaveCSV() {
@@ -274,22 +326,22 @@ void MainWindow::onDelColumn() {
 void MainWindow::setTablePreset() {
     QString data =
         "Запчасть,Остаток на складе,PN,SN,Стоимость\n"
-        "Глушитель,15,12A3456BCE,123-675,150\n"
-        "Дрыгатель,8,45B7890DEF,987-345,3500\n"
-        "Фильтр воздушный,20,78C2345GHI,567-123,500\n"
+        "Глушитель,15,12A3456BCE,123-675,0150\n"
+        "Дрыгатель,08,45B7890DEF,987-345,3500\n"
+        "Фильтр воздушный,20,78C2345GHI,567-123,0500\n"
         "Масляный насос,12,67D8901JKL,321-765,4500\n"
         "Тормозной диск,25,56E1234MNO,765-432,1200\n"
-        "Ремень ГРМ,10,23F4567PQR,234-678,750\n"
-        "Карбулятор,5,90G6789STU,876-543,3200\n"
-        "Шаровая опора,18,89H0123VWX,456-987,900\n"
-        "Генератор,7,34I5678YZA,654-321,5000\n"
-        "Свеча зажигания,40,12J8901BCD,789-012,300\n"
-        "Радиатор,9,78K2345EFG,321-876,4000\n"
-        "Топливный насос,6,67L3456HIJ,654-789,2500\n"
+        "Ремень ГРМ,10,23F4567PQR,234-678,0750\n"
+        "Карбулятор,05,90G6789STU,876-543,3200\n"
+        "Шаровая опора,18,89H0123VWX,456-987,0900\n"
+        "Генератор,07,34I5678YZA,654-321,5000\n"
+        "Свеча зажигания,40,12J8901BCD,789-012,0300\n"
+        "Радиатор,09,78K2345EFG,321-876,4000\n"
+        "Топливный насос,06,67L3456HIJ,654-789,2500\n"
         "Ступица колеса,15,23M5678KLM,567-234,1800\n"
         "Амортизатор,20,45N7890NOP,987-456,2200\n"
         "Подшипник,30,90O1234QRS,876-654,1200\n"
-        "Пыльник ШРУС,50,12P3456TUV,234-123,400";
+        "Пыльник ШРУС,50,12P3456TUV,234-123,0400";
 
     // Разбиваем данные на строки
     QStringList rows = data.split("\n");

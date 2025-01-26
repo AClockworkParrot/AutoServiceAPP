@@ -72,7 +72,7 @@
         <item row="0" column="0">
          <widget class="QLineEdit" name="lineSaveFilePath">
           <property name="text">
-           <string>C:/Qt projects/AutoService/AutoParts2.csv</string>
+           <string>C:/Qt projects/AutoService/AutoParts.csv</string>
           </property>
          </widget>
         </item>
@@ -90,7 +90,7 @@
         <item row="0" column="0">
          <widget class="QLineEdit" name="lineFilePath">
           <property name="text">
-           <string>C:\Qt projects\AutoService\AutoParts2.csv</string>
+           <string>C:\Qt projects\AutoService\AutoParts.csv</string>
           </property>
          </widget>
         </item>
