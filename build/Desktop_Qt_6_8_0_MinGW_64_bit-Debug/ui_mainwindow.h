@@ -19,7 +19,6 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -61,7 +60,6 @@ public:
     QPushButton *delRowButton;
     QSpacerItem *verticalSpacer;
     QMenuBar *menubar;
-    QMenu *menuHelp;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -221,14 +219,10 @@ public:
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 518, 21));
-        menuHelp = new QMenu(menubar);
-        menuHelp->setObjectName("menuHelp");
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
-
-        menubar->addAction(menuHelp->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -255,7 +249,6 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
         delColumnButton->setText(QCoreApplication::translate("MainWindow", "Delete column", nullptr));
         delRowButton->setText(QCoreApplication::translate("MainWindow", "Delete row", nullptr));
-        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi
 
 };

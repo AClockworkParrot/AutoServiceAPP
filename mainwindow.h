@@ -43,6 +43,8 @@ private:
     Ui::MainWindow *ui;
     QTableWidget *tableWidget;
     QPushButton *loadButton;
+    int lastSearchRow = -1;
+    int lastSearchCol = -1;
 
     void loadCSV(const QString &filePath);
 };

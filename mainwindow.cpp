@@ -150,7 +150,6 @@ void MainWindow::onSortDescending() {
     }
 }
 
-// Поиск строки в таблице
 void MainWindow::onSearch() {
     QString query = ui->lineSearch->text().trimmed(); // Получаем строку поиска
 
@@ -159,13 +158,22 @@ void MainWindow::onSearch() {
         return;
     }
 
+    int rowCount = ui->tableWidget->rowCount();
+    int colCount = ui->tableWidget->columnCount();
     bool found = false;
 
-    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
-        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+    // Начинаем поиск с позиции + 1
+    int startRow = lastSearchRow;
+    int startCol = lastSearchCol + 1;
+
+    for (int row = startRow; row < rowCount; ++row) {
+        for (int col = (row == startRow ? startCol : 0); col < colCount; ++col) {
             QTableWidgetItem *item = ui->tableWidget->item(row, col);
             if (item && item->text().contains(query, Qt::CaseInsensitive)) {
+                // Устанавливаем найденную ячейку как текущую
                 ui->tableWidget->setCurrentCell(row, col);
+                lastSearchRow = row;
+                lastSearchCol = col;
                 found = true;
                 break;
             }
@@ -174,9 +182,13 @@ void MainWindow::onSearch() {
     }
 
     if (!found) {
-        QMessageBox::information(this, "Результаты поиска", "Строка не найдена.");
+        // Сбрасываем поиск, если ничего не найдено
+        QMessageBox::information(this, "Результаты поиска", "Больше совпадений не найдено.");
+        lastSearchRow = -1;
+        lastSearchCol = -1;
     }
 }
+
 
 // Обработка изменения состояния чекбокса заголовка
 void MainWindow::onHeadingStateChanged(int state) {
