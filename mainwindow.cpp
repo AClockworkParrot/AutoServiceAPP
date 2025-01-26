@@ -29,7 +29,16 @@ MainWindow::MainWindow(QWidget *parent)
     // Подключение кнопок добавления строк и столбцов
     connect(ui->addRowButton, &QPushButton::clicked, this, &MainWindow::onAddRow);
     connect(ui->addColumnButton, &QPushButton::clicked, this, &MainWindow::onAddColumn);
+
+    // Подключение кнопок удаления строк и столбцов
+    connect(ui->delRowButton, &QPushButton::clicked, this, &MainWindow::onDelRow);
+    connect(ui->delColumnButton, &QPushButton::clicked, this, &MainWindow::onDelColumn);
+
+    // Устанавливаем пресет таблицы
+    setTablePreset();
 }
+
+
 
 MainWindow::~MainWindow() {
     delete ui;
@@ -234,6 +243,62 @@ void MainWindow::onAddColumn() {
     int currentColumnCount = ui->tableWidget->columnCount();
     ui->tableWidget->insertColumn(currentColumnCount);
 }
+
+void MainWindow::onDelRow() {
+    int currentRow = ui->tableWidget->currentRow(); // Получить индекс выбранной строки
+    if (currentRow >= 0) { // Проверка, что строка выбрана
+        ui->tableWidget->removeRow(currentRow);
+    }
+}
+
+void MainWindow::onDelColumn() {
+    int currentColumn = ui->tableWidget->currentColumn(); // Получить индекс выбранного столбца
+    if (currentColumn >= 0) { // Проверка, что столбец выбран
+        ui->tableWidget->removeColumn(currentColumn);
+    }
+}
+
+// Функция пресета таблицы для примера
+void MainWindow::setTablePreset() {
+    QString data =
+        "Запчасть,Остаток на складе,PN,SN,Стоимость\n"
+        "Глушитель,15,12A3456BCE,123-675,150\n"
+        "Дрыгатель,8,45B7890DEF,987-345,3500\n"
+        "Фильтр воздушный,20,78C2345GHI,567-123,500\n"
+        "Масляный насос,12,67D8901JKL,321-765,4500\n"
+        "Тормозной диск,25,56E1234MNO,765-432,1200\n"
+        "Ремень ГРМ,10,23F4567PQR,234-678,750\n"
+        "Карбулятор,5,90G6789STU,876-543,3200\n"
+        "Шаровая опора,18,89H0123VWX,456-987,900\n"
+        "Генератор,7,34I5678YZA,654-321,5000\n"
+        "Свеча зажигания,40,12J8901BCD,789-012,300\n"
+        "Радиатор,9,78K2345EFG,321-876,4000\n"
+        "Топливный насос,6,67L3456HIJ,654-789,2500\n"
+        "Ступица колеса,15,23M5678KLM,567-234,1800\n"
+        "Амортизатор,20,45N7890NOP,987-456,2200\n"
+        "Подшипник,30,90O1234QRS,876-654,1200\n"
+        "Пыльник ШРУС,50,12P3456TUV,234-123,400";
+
+    // Разбиваем данные на строки
+    QStringList rows = data.split("\n");
+
+    // Устанавливаем количество строк и столбцов
+    ui->tableWidget->setRowCount(rows.size());
+    ui->tableWidget->setColumnCount(rows.first().split(",").size());
+
+    // Устанавливаем заголовки для столбцов (первая строка данных)
+    QStringList headers = rows.first().split(",");
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+
+    // Заполняем таблицу данными
+    for (int row = 1; row < rows.size(); ++row) { // Начинаем с 1, так как 0 — это заголовки
+        QStringList cells = rows[row].split(",");
+        for (int col = 0; col < cells.size(); ++col) {
+            ui->tableWidget->setItem(row - 1, col, new QTableWidgetItem(cells[col].trimmed()));
+        }
+    }
+}
+
 
 
 void MainWindow::on_centralwidget_customContextMenuRequested(const QPoint &pos)

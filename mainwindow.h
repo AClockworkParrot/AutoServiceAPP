@@ -35,6 +35,9 @@ private slots:
     void restoreHeaderRow();
     void onAddRow();
     void onAddColumn();
+    void setTablePreset();
+    void onDelRow();
+    void onDelColumn();
 
 private:
     Ui::MainWindow *ui;

@@ -56,6 +56,9 @@ public:
     QLabel *label_3;
     QPushButton *addColumnButton;
     QPushButton *addRowButton;
+    QLabel *label_4;
+    QPushButton *delColumnButton;
+    QPushButton *delRowButton;
     QSpacerItem *verticalSpacer;
     QMenuBar *menubar;
     QMenu *menuHelp;
@@ -65,7 +68,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(495, 395);
+        MainWindow->resize(518, 513);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -186,6 +189,22 @@ public:
 
         verticalLayout->addWidget(addRowButton);
 
+        label_4 = new QLabel(centralwidget);
+        label_4->setObjectName("label_4");
+        label_4->setFont(font);
+
+        verticalLayout->addWidget(label_4);
+
+        delColumnButton = new QPushButton(centralwidget);
+        delColumnButton->setObjectName("delColumnButton");
+
+        verticalLayout->addWidget(delColumnButton);
+
+        delRowButton = new QPushButton(centralwidget);
+        delRowButton->setObjectName("delRowButton");
+
+        verticalLayout->addWidget(delRowButton);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -201,7 +220,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 495, 21));
+        menubar->setGeometry(QRect(0, 0, 518, 21));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName("menuHelp");
         MainWindow->setMenuBar(menubar);
@@ -233,6 +252,9 @@ public:
         label_3->setText(QCoreApplication::translate("MainWindow", "Add", nullptr));
         addColumnButton->setText(QCoreApplication::translate("MainWindow", "Add column", nullptr));
         addRowButton->setText(QCoreApplication::translate("MainWindow", "Add row", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
+        delColumnButton->setText(QCoreApplication::translate("MainWindow", "Delete column", nullptr));
+        delRowButton->setText(QCoreApplication::translate("MainWindow", "Delete row", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi
 

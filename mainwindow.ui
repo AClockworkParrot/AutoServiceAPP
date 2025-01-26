@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
-    <height>395</height>
+    <width>518</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -190,6 +190,32 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label_4">
+          <property name="font">
+           <font>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="delColumnButton">
+          <property name="text">
+           <string>Delete column</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="delRowButton">
+          <property name="text">
+           <string>Delete row</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Orientation::Vertical</enum>
@@ -213,7 +239,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>495</width>
+     <width>518</width>
      <height>21</height>
     </rect>
    </property>

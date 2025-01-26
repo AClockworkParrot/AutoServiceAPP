@@ -48,7 +48,10 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "state",
     "restoreHeaderRow",
     "onAddRow",
-    "onAddColumn"
+    "onAddColumn",
+    "setTablePreset",
+    "onDelRow",
+    "onDelColumn"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -61,7 +64,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,16 +72,19 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   74,    2, 0x08,    1 /* Private */,
-       3,    0,   75,    2, 0x08,    2 /* Private */,
-       4,    1,   76,    2, 0x08,    3 /* Private */,
-       6,    0,   79,    2, 0x08,    5 /* Private */,
-       7,    0,   80,    2, 0x08,    6 /* Private */,
-       8,    0,   81,    2, 0x08,    7 /* Private */,
-       9,    1,   82,    2, 0x08,    8 /* Private */,
-      11,    0,   85,    2, 0x08,   10 /* Private */,
-      12,    0,   86,    2, 0x08,   11 /* Private */,
-      13,    0,   87,    2, 0x08,   12 /* Private */,
+       1,    0,   92,    2, 0x08,    1 /* Private */,
+       3,    0,   93,    2, 0x08,    2 /* Private */,
+       4,    1,   94,    2, 0x08,    3 /* Private */,
+       6,    0,   97,    2, 0x08,    5 /* Private */,
+       7,    0,   98,    2, 0x08,    6 /* Private */,
+       8,    0,   99,    2, 0x08,    7 /* Private */,
+       9,    1,  100,    2, 0x08,    8 /* Private */,
+      11,    0,  103,    2, 0x08,   10 /* Private */,
+      12,    0,  104,    2, 0x08,   11 /* Private */,
+      13,    0,  105,    2, 0x08,   12 /* Private */,
+      14,    0,  106,    2, 0x08,   13 /* Private */,
+      15,    0,  107,    2, 0x08,   14 /* Private */,
+      16,    0,  108,    2, 0x08,   15 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -88,6 +94,9 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   10,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -125,6 +134,12 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'onAddRow'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'onAddColumn'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setTablePreset'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'onDelRow'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'onDelColumn'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -146,6 +161,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->restoreHeaderRow(); break;
         case 8: _t->onAddRow(); break;
         case 9: _t->onAddColumn(); break;
+        case 10: _t->setTablePreset(); break;
+        case 11: _t->onDelRow(); break;
+        case 12: _t->onDelColumn(); break;
         default: ;
         }
     }
@@ -170,13 +188,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 10;
+        _id -= 13;
     }
     return _id;
 }
