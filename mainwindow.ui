@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>725</width>
-    <height>618</height>
+    <width>729</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -173,12 +173,23 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineFilter"/>
+         <widget class="QLineEdit" name="lineFilter">
+          <property name="text">
+           <string>&gt;15 &amp;&amp; &lt;=20</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="filterButton">
           <property name="text">
            <string>Filter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="resetFilterButton">
+          <property name="text">
+           <string>Reset filter</string>
           </property>
          </widget>
         </item>
@@ -261,7 +272,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>725</width>
+     <width>729</width>
      <height>21</height>
     </rect>
    </property>

@@ -23,6 +23,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Подключение кнопки поиска
     connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearch);
 
+    // Подключение кнопки фильтра
+    connect(ui->filterButton, &QPushButton::clicked, this, &MainWindow::onFilterButtonClicked);
+    connect(ui->resetFilterButton, &QPushButton::clicked, this, &MainWindow::onResetFilterButtonClicked);
+
     // Подключение чекбокса заголовка
     connect(ui->headingCheckBox, &QCheckBox::checkStateChanged, this, &MainWindow::onHeadingStateChanged);
 
@@ -202,6 +206,7 @@ void MainWindow::onSortDescending() {
     }
 }
 
+// Функционал последовательного поиска
 void MainWindow::onSearch() {
     QString query = ui->lineSearch->text().trimmed(); // Получаем строку поиска
 
@@ -240,6 +245,126 @@ void MainWindow::onSearch() {
         lastSearchCol = -1;
     }
 }
+
+// Фильтрация таблицы по выражению
+void MainWindow::onFilterButtonClicked() {
+    static const QRegularExpression regex(R"((<|>|<=|>=|==|!=)(\d+))");
+
+    QString filterExpression = ui->lineFilter->text().trimmed();
+
+    if (filterExpression.isEmpty()) {
+        return; // Ничего не делать, если выражение пустое
+    }
+
+    // Проверяем на сложное выражение
+    if (filterExpression.contains("&&")) {
+        QStringList conditions = filterExpression.split("&&");
+        QVector<QPair<QString, int>> parsedConditions;
+
+        for (const QString &condition : conditions) {
+            QRegularExpressionMatch match = regex.match(condition.trimmed());
+            if (!match.hasMatch()) {
+                QMessageBox::warning(this, "Некорректное выражение", "Введите выражение в формате >число && <число и т.д.");
+                return;
+            }
+            parsedConditions.append({match.captured(1), match.captured(2).toInt()});
+        }
+
+        for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+            for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+                QTableWidgetItem *item = ui->tableWidget->item(row, col);
+                if (!item) continue;
+
+                bool highlight = true;
+                bool validConversion;
+                int cellValue = item->text().toInt(&validConversion);
+
+                if (!validConversion) {
+                    item->setBackground(Qt::white); // Сбрасываем подсветку для некорректных данных
+                    continue;
+                }
+
+                for (const auto &condition : parsedConditions) {
+                    const QString &operatorStr = condition.first;
+                    int value = condition.second;
+
+                    if (operatorStr == ">" && !(cellValue > value)) {
+                        highlight = false;
+                    } else if (operatorStr == "<" && !(cellValue < value)) {
+                        highlight = false;
+                    } else if (operatorStr == ">=" && !(cellValue >= value)) {
+                        highlight = false;
+                    } else if (operatorStr == "<=" && !(cellValue <= value)) {
+                        highlight = false;
+                    } else if (operatorStr == "==" && !(cellValue == value)) {
+                        highlight = false;
+                    } else if (operatorStr == "!=" && !(cellValue != value)) {
+                        highlight = false;
+                    }
+                }
+
+                item->setBackground(highlight ? Qt::yellow : Qt::white);
+            }
+        }
+        return;
+    }
+
+    // Обработка простых выражений
+    QRegularExpressionMatch match = regex.match(filterExpression);
+
+    if (!match.hasMatch()) {
+        QMessageBox::warning(this, "Некорректное выражение", "Введите выражение в формате >число, <число и т.д.");
+        return;
+    }
+
+    QString operatorStr = match.captured(1); // Оператор сравнения
+    int value = match.captured(2).toInt();   // Значение для сравнения
+
+    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+            QTableWidgetItem *item = ui->tableWidget->item(row, col);
+            if (!item) continue;
+
+            bool highlight = false;
+            bool validConversion;
+            int cellValue = item->text().toInt(&validConversion);
+
+            if (!validConversion) {
+                item->setBackground(Qt::white); // Сбрасываем подсветку для некорректных данных
+                continue;
+            }
+
+            if (operatorStr == ">" && cellValue > value) {
+                highlight = true;
+            } else if (operatorStr == "<" && cellValue < value) {
+                highlight = true;
+            } else if (operatorStr == ">=" && cellValue >= value) {
+                highlight = true;
+            } else if (operatorStr == "<=" && cellValue <= value) {
+                highlight = true;
+            } else if (operatorStr == "==" && cellValue == value) {
+                highlight = true;
+            } else if (operatorStr == "!=" && cellValue != value) {
+                highlight = true;
+            }
+
+            item->setBackground(highlight ? Qt::yellow : Qt::white);
+        }
+    }
+}
+
+// Сброс фильтрации
+void MainWindow::onResetFilterButtonClicked() {
+    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+            QTableWidgetItem *item = ui->tableWidget->item(row, col);
+            if (item) {
+                item->setBackground(Qt::white); // Сбрасываем подсветку
+            }
+        }
+    }
+}
+
 
 // Обработка изменения состояния чекбокса заголовка
 void MainWindow::onHeadingStateChanged(int state) {

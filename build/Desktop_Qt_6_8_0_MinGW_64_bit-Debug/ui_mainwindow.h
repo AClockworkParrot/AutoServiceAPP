@@ -55,6 +55,7 @@ public:
     QLabel *label_5;
     QLineEdit *lineFilter;
     QPushButton *filterButton;
+    QPushButton *resetFilterButton;
     QLabel *label_3;
     QPushButton *addColumnButton;
     QPushButton *addRowButton;
@@ -69,7 +70,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(725, 618);
+        MainWindow->resize(729, 648);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -189,6 +190,11 @@ public:
 
         verticalLayout->addWidget(filterButton);
 
+        resetFilterButton = new QPushButton(centralwidget);
+        resetFilterButton->setObjectName("resetFilterButton");
+
+        verticalLayout->addWidget(resetFilterButton);
+
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName("label_3");
         label_3->setFont(font);
@@ -237,7 +243,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 725, 21));
+        menubar->setGeometry(QRect(0, 0, 729, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -263,7 +269,9 @@ public:
         sortAscButton->setText(QCoreApplication::translate("MainWindow", "Increase", nullptr));
         sortDescButton->setText(QCoreApplication::translate("MainWindow", "Decrease", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
+        lineFilter->setText(QCoreApplication::translate("MainWindow", ">15 && <=20", nullptr));
         filterButton->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
+        resetFilterButton->setText(QCoreApplication::translate("MainWindow", "Reset filter", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Add", nullptr));
         addColumnButton->setText(QCoreApplication::translate("MainWindow", "Add column", nullptr));
         addRowButton->setText(QCoreApplication::translate("MainWindow", "Add row", nullptr));

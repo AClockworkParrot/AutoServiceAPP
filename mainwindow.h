@@ -38,6 +38,8 @@ private slots:
     void setTablePreset();
     void onDelRow();
     void onDelColumn();
+    void onFilterButtonClicked();
+    void onResetFilterButtonClicked();
 
 private:
     Ui::MainWindow *ui;
